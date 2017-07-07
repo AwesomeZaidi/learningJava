@@ -20,17 +20,38 @@ public class BabyNames {
             }
         }
     }
-    public void totalBirths(FileResource fr) {
+    public void totalBirthsAndNames(FileResource fr) {
         int totalBirths = 0;
+        int totalBoys = 0;
+        int totalGirls = 0;
+        int totalBoysNames = 0;
+        int totalGirlsNames = 0;
+        int totalNames = 0;
         for (CSVRecord rec : fr.getCSVParser(false)) {
             int numBorn = Integer.parseInt(rec.get(2));
             totalBirths += numBorn;
+            if (rec.get(1).equals("M")) {
+                totalBoys += numBorn;
+                totalBoysNames += 1;
+            }
+            else {
+                totalGirls += numBorn;
+                totalGirlsNames += 1;
+            }
         }
+        totalNames = totalGirlsNames + totalBoysNames;
         System.out.println("Total Births = " + totalBirths);
+        System.out.println("Total Girls = " + totalGirls);
+        System.out.println("Total Boys = " + totalBoys);
+        System.out.println("Total Girls Names = " + totalGirlsNames);
+        System.out.println("Total Boys Names = " + totalBoysNames);
+        System.out.println("Total Names = " + totalNames);
+        
     }
     
-    public void testTotalBirths() {
+    public void testTotalBirthsAndNames() {
+        //FileResource fr = new FileResource("data/us_babynames_by_year/yob2014.csv");
         FileResource fr = new FileResource("data/example-small.csv");
-        totalBirths(fr);
+        totalBirthsAndNames(fr);
     }
 }
