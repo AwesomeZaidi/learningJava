@@ -20,4 +20,17 @@ public class BabyNames {
             }
         }
     }
+    public void totalBirths(FileResource fr) {
+        int totalBirths = 0;
+        for (CSVRecord rec : fr.getCSVParser(false)) {
+            int numBorn = Integer.parseInt(rec.get(2));
+            totalBirths += numBorn;
+        }
+        System.out.println("Total Births = " + totalBirths);
+    }
+    
+    public void testTotalBirths() {
+        FileResource fr = new FileResource("data/example-small.csv");
+        totalBirths(fr);
+    }
 }
